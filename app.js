@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -9,16 +12,11 @@ const ExpressError = require("./utils/ExpressError");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-
-const userRoutes=require('./routes/users.js')
+const userRoutes = require("./routes/users.js");
 const campgroundsRoutes = require("./routes/campgrounds.js");
 const reviewsRoutes = require("./routes/reviews.js");
 
-
-
 mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
-
-
 
 const db = mongoose.connection;
 
@@ -60,16 +58,13 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  res.locals.currentUser=req.user
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 
-
-
-
-app.use('/',userRoutes)
+app.use("/", userRoutes);
 app.use("/campgrounds", campgroundsRoutes);
 app.use("/campgrounds/:id/reviews", reviewsRoutes);
 
