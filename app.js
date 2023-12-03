@@ -19,7 +19,9 @@ const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 
-const dbUrl = process.env.DB_URL || 'mongodb+srv://saranyelpcamp:e4jdC9iLULEj2hpk@cluster0.yh9wymv.mongodb.net/';
+const dbUrl =
+  process.env.DB_URL ||
+  "mongodb+srv://saranyelpcamp:e4jdC9iLULEj2hpk@cluster0.yh9wymv.mongodb.net/";
 
 mongoose.connect(dbUrl);
 
@@ -65,8 +67,10 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
+    // expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    // maxAge: 1000 * 60 * 60 * 24 * 7,
+    expires: Date.now() + 1000 * 60 * 2, // Sets the expiration date as a timestamp (current time + 2 minutes)
+    maxAge: 1000 * 60 * 2,
   },
 };
 
