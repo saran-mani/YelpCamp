@@ -20,8 +20,7 @@ const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 
 const dbUrl =
-  process.env.DB_URL ||
-  "mongodb+srv://saranyelpcamp:e4jdC9iLULEj2hpk@cluster0.yh9wymv.mongodb.net/";
+  process.env.DB_URL;
 
 mongoose.connect(dbUrl);
 
